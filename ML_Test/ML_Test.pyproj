@@ -4,7 +4,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>6d892492-820c-4b3d-a59a-b379e23e6403</ProjectGuid>
     <ProjectHome>.</ProjectHome>
-    <StartupFile>ML_Test.py</StartupFile>
+    <StartupFile>AI.py</StartupFile>
     <SearchPath>
     </SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
@@ -24,6 +24,9 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="ML_Test.py" />
+    <Compile Include="AI.py">
+      <SubType>Code</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Interpreter Include="env1\">
