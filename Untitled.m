@@ -1,10 +1,9 @@
-load('normal.mat')
 
 Fs = 12000;
 T = 1/Fs
 L = 6000
 t = (0:L-1)*T;
-x = X097_DE_time(1:6000)
+x = X119_DE_time(1:6000)
 %plot(t,x)
 Q = fft(x)
 Y = fft(x)/L;

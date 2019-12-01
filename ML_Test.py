@@ -1,6 +1,7 @@
 
 print('test')
 
+from os.path import dirname, join as pjoin
 import numpy as np
 import scipy.io as sp
 import matplotlib.pyplot as plt
@@ -8,13 +9,15 @@ import matplotlib.pyplot as plt
 def datasetmaker(offset, matfilename):
     """offset is multiple of 256 matfile name is output name"""
 
+    #Computes FFT of dataset
     Fs = 12000
     T = 1/Fs
     L = 256
     t = np.arange(0, L) * T
     a = 0 + 256 * offset
     b = 255 + 256 * offset
-    matfilenamedat = "{}.mat" .format(matfilename)
+    matfilenamedat = "{}{}.mat" .format(matfilename,offset) #Makes dataset filename
+    matfilenamedat = pjoin(data_dir + '\\Sets', matfilenamedat)
     vectorname = "fftdata{}" .format(matfilename)
     S = data[a:b]
 
@@ -24,29 +27,36 @@ def datasetmaker(offset, matfilename):
     P2 = abs(Y/L)
     P1 = P2[0:L//2+1]
     P1[1:len(P1)-1] = 2*P1[1:len(P1)-1]
-    P1 = P1/max(P1)
+    #P1 = P1/max(P1)  Standardizes the data.  Was removed to use the scaler function later on
 
     sp.savemat(matfilenamedat, {vectorname:P1})
     sp.savemat('timefile.mat', {'time':f})
 
+matname = 'Normal1HP'
 
-bearingdata = sp.loadmat('normal.mat')
+data_dir = 'C:\\Users\\Nick\\Desktop\\SeDesgn-master\\SeDesgn-master\\ML_Test\\Data'
+mat_fname = pjoin(data_dir, matname + '.mat')
+
+
+bearingdata = sp.loadmat(mat_fname)
 sorted(bearingdata.keys())
 print(bearingdata)
 
-data = bearingdata['X097_DE_time']
+data = bearingdata['X098_DE_time']
 print(data)
 
-datasetmaker(0, 'normalset1')
-datasetmaker(1, 'normalset2')
-datasetmaker(2, 'normalset3')
-datasetmaker(3, 'normalset4')
-datasetmaker(4, 'normalset5')
-datasetmaker(5, 'normalset6')
-datasetmaker(6, 'normalset7')
-datasetmaker(7, 'normalset8')
-datasetmaker(8, 'normalset9')
-datasetmaker(9, 'normalset10')
+dataname = matname + 'set'
+
+datasetmaker(0, dataname)
+datasetmaker(1, dataname)
+datasetmaker(2, dataname)
+datasetmaker(3, dataname)
+datasetmaker(4, dataname)
+datasetmaker(5, dataname)
+datasetmaker(6, dataname)
+datasetmaker(7, dataname)
+datasetmaker(8, dataname)
+datasetmaker(9, dataname)
 
 
 
